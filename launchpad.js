@@ -222,7 +222,36 @@ function noteOff(note){
     if(asterNoteArr.includes(note)){
       document.getElementById('planetName').textContent = "Asteroid Belt!"
       document.getElementById("planetImg").src="https://i.gifer.com/ZUiY.gif"
-      document.getElementById("infoCard").innerText = "Make a wish!"
+      var brochure = document.getElementById("infoCard");
+      brochure.innerText = "Travel Brochure:"
+      brochure.innerHTML += "<div class=\"posters\">" 
+      + "<img src=\"https://d2pn8kiwq2w21t.cloudfront.net/images/grand_tour.width-1320.jpg\""
+      + " style=\"width:295px\">"
+      + "</div>"
+
+      brochure.innerHTML += "<div class=\"posters\">" 
+      + "<img src=\"https://d2pn8kiwq2w21t.cloudfront.net/images/mars.width-1320.jpg\""
+      + " style=\"width:295px\">"
+      + "</div>"
+
+      brochure.innerHTML += "<div class=\"posters\">" 
+      + "<img src=\"https://d2pn8kiwq2w21t.cloudfront.net/images/earth.width-1320.jpg\""
+      + " style=\"width:295px\">"
+      + "</div>"
+
+      brochure.innerHTML += "<div class=\"posters\">" 
+      + "<img src=\"https://d2pn8kiwq2w21t.cloudfront.net/images/venus.width-1320.jpg\""
+      + " style=\"width:295px\">"
+      + "</div>"
+
+      brochure.innerHTML += "<div class=\"posters\">" 
+      + "<img src=\"https://d2pn8kiwq2w21t.cloudfront.net/images/jupiter.width-1320.jpg\""
+      + " style=\"width:295px\">"
+      + "</div>"
+
+      brochure.innerHTML += "<br><a class=\"prev\" onclick=\"plusSlides(-1)\">❮Prev Page<</a>"
+      + " <a class=\"next\" onclick=\"plusSlides(1)\">>Next Page❯</a>"
+      
       document.getElementById("symbol").innerText = ""
     }
 

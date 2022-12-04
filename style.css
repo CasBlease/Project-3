@@ -33,3 +33,9 @@ h3{
     color: gold;
     text-shadow: 5px 5px 10px gold;
 }
+
+#tBrochure{
+    width: 295px;
+}
+
+.posters {display: none}

@@ -43,3 +43,26 @@ function parseBody(resp){
     document.getElementById("infoCard").innerHTML = info;
     console.log(info);
 }
+
+//brochure slideshow code
+let postIndex = 0;
+showSlides(postIndex);
+
+function plusSlides(n) {
+  showSlides(postIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(postIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("posters");
+  if (n > slides.length) {postIndex = 0}    
+  if (n < 1) {postIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slides[postIndex-1].style.display = "block";  
+}
