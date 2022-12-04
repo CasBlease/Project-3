@@ -1,12 +1,10 @@
 // build params
-url = "https://api.le-systeme-solaire.net/rest/bodies/"
 //key = there isn't one???
 //how to include launchpad - each button/button section is assigned a planet
 
 
-function makeApiCall(){
-    url = "https://api.le-systeme-solaire.net/rest/bodies/mars"
-    id = "mars"
+function makeApiCall(id){
+    url = "https://api.le-systeme-solaire.net/rest/bodies/" + id
     //build params
     params = {"id": id}
     console.log(params)
@@ -17,6 +15,7 @@ function makeApiCall(){
         data: params,
         success: function(resp){
             console.log(resp);
+            parseBody(resp);
         },
         error: function(error){
             console.log(error)
@@ -28,13 +27,19 @@ function makeApiCall(){
 
 function parseBody(resp){
 // index into the JSON resp as dictionary to get the individual pieces of data *continue editing*
-    name = resp["body"]["englishName"]
-    //windSpeed = resp["wind"]["speed"]
-    //description = resp["weather"][0]["description"]
-    // make sure the data is a number(type float) not a string
-    // console.log(typeof temp)
-    // console.log(typeof windSpeed)
-    //console.log(`description = ${description}\n temp in farinheight = ${temp}\n wind speed in mph = ${windSpeed}`)
+    info = ""
+    info += "<h3>Profile</h3>"
+    info += "<p>"
+    info += "- Mass: " + resp["mass"]["massValue"] + " * 10<sup>" + resp["mass"]["massExponent"] + "</sup> kg.<br>"
+    info += "- Volume: " + resp["vol"]["volValue"] + " * 10<sup>" + resp["vol"]["volExponent"] + "</sup> km<sup>3</sup>.<br>"
+    info += "- Gravity: " + resp["gravity"] + " m/s<sup>2</sup>.<br>"
+    if(resp["discoveredBy"] !== ""){
+        info += "- Discovered by " + resp["discoveredBy"] + ".<br>"
+    }
+    if(resp["discoveryDate"] !== ""){
+        info += "- Date discovered: " + resp["discoveryDate"] + ".<br>"
+    }
+    info += "</p>"
+    document.getElementById("infoCard").innerHTML = info;
+    console.log(info);
 }
-
-makeApiCall();

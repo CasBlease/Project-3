@@ -33,6 +33,10 @@ neptNoteArr = [40,44,45,48,49,50];
 plutoClr = 3;
 plutoNoteArr = [51,55,80,84];
 
+asterNoteArr = [36,41,46,58,
+                61,64,71,74,
+                77,89,94,99];
+
 // This block of functions are manage connecting the web-midi-api to your launchpad
 // they also parse the incoming and outgoing signals into meaningful numbers
 if (navigator.requestMIDIAccess) {
@@ -94,60 +98,59 @@ function noteOn(note) {
     //     colorM(note+1,124);
     //     colorM(note+2,124);
     // }
-    document.getElementById('planetName').textContent = "The Sun"
-    document.getElementById("planetImg").src="https://solarsystem.nasa.gov/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBamRTIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--8f58db6031cb325cfbaf366a330cf78148c0444a/Sun.png?disposition=attachment"
+    document.getElementById('planetName').textContent = "A new destination..."
+    document.getElementById("planetImg").src="https://i.gifer.com/Vp3M.gif"
+    document.getElementById("infoCard").innerText = "Traveling...";
+    document.getElementById("symbol").innerText = ""
     
     colorM(note, selectClr);
 }
 
 function noteOff(note){
     console.log(`note:${note} // off`);
-    
-
-    if ( note == 99){
-        document.getElementById('hello_tag').textContent = "Hello World!"
-        colorM(note,0);
-        colorM(note+1,0);
-        colorM(note+2,0);
-      }
-
-    if ( note == 64){
-        document.getElementById('hello_tag').textContent = "Hello World!"
-        colorM(note,0);
-        colorM(note+1,0);
-        colorM(note+2,0);
-    }
 
     if(mercNoteArr.includes(note)){
-        document.getElementById('planetName').textContent = "Mercury"
-        document.getElementById("planetImg").src="https://solarsystem.nasa.gov/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBcVVFIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--271ff8be3125a1e3b9284c6b326bca3bea2dc590/PIA16853.jpg?disposition=attachment"
+      makeApiCall("mercure");
+      document.getElementById('planetName').textContent = "☿ Mercury ☿"
+      document.getElementById("planetImg").src="https://i.gifer.com/Owne.gif"
+      document.getElementById("symbol").innerText = "The symbol for Mercury represents the head and winged cap "
+      + "of Mercury, god of commerce and communication, surmounting his caduceus (staff).";
         
-        for(i=0;i<mercNoteArr.length;i++){
-            colorM(mercNoteArr[i],mercClr);
-        }
+      for(i=0;i<mercNoteArr.length;i++){
+        colorM(mercNoteArr[i],mercClr);
+      }
     }
 
     if(venNoteArr.includes(note)){
-        document.getElementById('planetName').textContent = "Venus"
-        document.getElementById("planetImg").src="https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/imagesvenus20191211venus20191211-16.jpeg?itok=gbbFb7q5"
+      makeApiCall("venus");
+      document.getElementById('planetName').textContent = "♀ Venus ♀"
+      document.getElementById("planetImg").src="https://i.gifer.com/UK7n.gif"
+      document.getElementById("symbol").innerText = "The symbol for Venus is designated as the female symbol, "
+      + "thought to be the stylized representation of the hand mirror of this goddess of love."
         
-        for(i=0;i<venNoteArr.length;i++){
-            colorM(venNoteArr[i],venClr);
-        }
+      for(i=0;i<venNoteArr.length;i++){
+        colorM(venNoteArr[i],venClr);
+      }
     }
 
     if(earthNoteArr.includes(note)){
-        document.getElementById('planetName').textContent = "Earth"
-        document.getElementById("planetImg").src="https://eoimages.gsfc.nasa.gov/images/imagerecords/0/885/modis_wonderglobe.jpg"
+      makeApiCall("terre");
+      document.getElementById('planetName').textContent = "🜨 Earth 🜨"
+      document.getElementById("planetImg").src="https://i.gifer.com/hFZ.gif"
+      document.getElementById("symbol").innerText = "The symbol for Earth shows a globe bisected"
+      + " by meridian lines into four quarters."
         
-        for(i=0;i<earthNoteArr.length;i++){
-            colorM(earthNoteArr[i],earthClr);
-        }
+      for(i=0;i<earthNoteArr.length;i++){
+        colorM(earthNoteArr[i],earthClr);
+      }
     }
 
     if(marsNoteArr.includes(note)){
-        document.getElementById('planetName').textContent = "Mars"
-        document.getElementById("planetImg").src="https://space-facts.com/wp-content/uploads/mars-v2.jpg"
+        makeApiCall("mars");
+        document.getElementById('planetName').textContent = "♂ Mars ♂"
+        document.getElementById("planetImg").src="https://i.gifer.com/7gz4.gif"
+        document.getElementById("symbol").innerText = "The symbol for Mars represents the shield and spear"
+        + " of the god of war, Mars; it is also the male or masculine symbol."
         
         for(i=0;i<marsNoteArr.length;i++){
             colorM(marsNoteArr[i],marsClr);
@@ -155,48 +158,72 @@ function noteOff(note){
     }
 
     if(jupiNoteArr.includes(note)){
-        document.getElementById('planetName').textContent = "Jupiter"
-        document.getElementById("planetImg").src="https://solarsystem.nasa.gov/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZ0FTIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--d91c8056b0a4c3cd4cf6bcd3f7e6eda669270678/stsci-h-p1936a_1800.jpg?disposition=attachment"
+      makeApiCall("jupiter");
+      document.getElementById('planetName').textContent = "♃ Jupiter ♃"
+      document.getElementById("planetImg").src="https://i.gifer.com/WME4.gif"
+      document.getElementById("symbol").innerText = "The symbol for Jupiter is said to represent a hieroglyph"
+      + " of the eagle, Jove's bird, or to be the initial letter of Zeus with a line drawn through it"
+      + " to indicate its abbreviation."
         
-        for(i=0;i<jupiNoteArr.length;i++){
-            colorM(jupiNoteArr[i],jupiClr);
-        }
+      for(i=0;i<jupiNoteArr.length;i++){
+          colorM(jupiNoteArr[i],jupiClr);
+      }
     }
 
     if(satNoteArr.includes(note)){
-        document.getElementById('planetName').textContent = "Saturn"
-        document.getElementById("planetImg").src="https://www.nasa.gov/sites/default/files/styles/side_image/public/thumbnails/image/edu_ring_a-round_the_saturn.jpg?itok=bmG0qRWp"
-        
-        for(i=0;i<satNoteArr.length;i++){
-            colorM(satNoteArr[i],satClr);
-        }
+      makeApiCall("saturne");
+      document.getElementById('planetName').textContent = "♄ Saturn ♄"
+      document.getElementById("planetImg").src="https://i.gifer.com/56i2.gif"
+      document.getElementById("symbol").innerText = "The symbol for Saturn is thought to be"
+      + " an ancient scythe or sickel, as Saturn was the god of seed-sowing and also of time."
+
+      for(i=0;i<satNoteArr.length;i++){
+        colorM(satNoteArr[i],satClr);
+      }
     }
 
     if(uraNoteArr.includes(note)){
-        document.getElementById('planetName').textContent = "Uranus"
-        document.getElementById("planetImg").src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Uranus_as_seen_by_NASA%27s_Voyager_2_%28remastered%29_-_JPEG_converted.jpg/220px-Uranus_as_seen_by_NASA%27s_Voyager_2_%28remastered%29_-_JPEG_converted.jpg"
+      makeApiCall("uranus");
+      document.getElementById('planetName').textContent = "⛢ Uranus ⛢"
+      document.getElementById("planetImg").src="https://i.gifer.com/PAx.gif"
+      document.getElementById("symbol").innerText = "The symbol for Uranus is represented by"
+      + " combined devices indicating the Sun plus the spear of Mars, as Uranus was the personification"
+      + " of heaven in Greek mythology, dominated by the light of the Sun and the power of Mars."
         
-        for(i=0;i<uraNoteArr.length;i++){
-            colorM(uraNoteArr[i],uraClr);
-        }
+      for(i=0;i<uraNoteArr.length;i++){
+          colorM(uraNoteArr[i],uraClr);
+      }
     }
 
     if(neptNoteArr.includes(note)){
-        document.getElementById('planetName').textContent = "Neptune"
-        document.getElementById("planetImg").src="https://spaceplace.nasa.gov/all-about-neptune/en/neptune1.en.jpg"
+      makeApiCall("neptune");
+      document.getElementById('planetName').textContent = "♆ Neptune ♆"
+      document.getElementById("planetImg").src="https://i.gifer.com/KhVO.gif"
+      document.getElementById("symbol").innerText = "The symbol for Neptune is the trident "
+      + "(long three-pronged fork or weapon) of Neptune, god of the sea."
         
-        for(i=0;i<neptNoteArr.length;i++){
-            colorM(neptNoteArr[i],neptClr);
-        }
+      for(i=0;i<neptNoteArr.length;i++){
+        colorM(neptNoteArr[i],neptClr);
+      }
     }
 
     if(plutoNoteArr.includes(note)){
-        document.getElementById('planetName').textContent = "Pluto"
-        document.getElementById("planetImg").src="https://www.nasa.gov/sites/default/files/styles/full_width/public/thumbnails/image/nh_pluto_10.png?itok=MWjNZ1O8"
+      makeApiCall("pluton");
+      document.getElementById('planetName').textContent = "♇ Pluto ♇"
+      document.getElementById("planetImg").src="https://i.gifer.com/UZrh.gif"
+      document.getElementById("symbol").innerText = "The symbol for dwarf planet Pluto is a monogram"
+      + " made up of P and L in Pluto (and also the initials of Percival Lowell, who predicted its discovery)."
         
-        for(i=0;i<plutoNoteArr.length;i++){
-            colorM(plutoNoteArr[i],plutoClr);
-        }
+      for(i=0;i<plutoNoteArr.length;i++){
+        colorM(plutoNoteArr[i],plutoClr);
+      }
+    }
+
+    if(asterNoteArr.includes(note)){
+      document.getElementById('planetName').textContent = "Asteroid Belt!"
+      document.getElementById("planetImg").src="https://i.gifer.com/ZUiY.gif"
+      document.getElementById("infoCard").innerText = "Make a wish!"
+      document.getElementById("symbol").innerText = ""
     }
 
 }
